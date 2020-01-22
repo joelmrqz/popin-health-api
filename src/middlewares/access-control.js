@@ -5,10 +5,9 @@ const accessControl = (request, response, next) => {
 
   if (request.method === 'OPTIONS') {
     response.status(200).json({}).end();
-    return;
+  } else {
+    next();
   }
-
-  next();
 };
 
 module.exports = accessControl;

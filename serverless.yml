@@ -1,0 +1,14 @@
+service: popin-one-health-api
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: 'dev'
+  region: us-east-1
+functions:
+  index:
+    handler: src/handler.server
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'
+plugins:
+  - serverless-offline

@@ -1,0 +1,23 @@
+{
+  "name": "popin-one-health-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@excore:joelmrqz/popin-health-api.git"
+  },
+  "author": "Popin, Inc.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "serverless-http": "^2.3.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^5.12.1"
+  }
+}
