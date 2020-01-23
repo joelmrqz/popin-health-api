@@ -1,4 +1,4 @@
-service: pohapi-01
+service: popin-one-health-api
 provider:
   name: aws
   runtime: nodejs12.x
