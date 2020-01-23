@@ -1,14 +1,29 @@
-service: popin-one-health-api
+service: pohapi-01
 provider:
   name: aws
   runtime: nodejs12.x
   stage: 'dev'
   region: us-east-1
 functions:
-  index:
+  getPofile:
     handler: src/handler.server
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: 'GET /{userProfile}/profile'
+  getActivities:
+    handler: src/handler.server
+    events:
+      - http: 'GET /{userProfile}/activities'
+  getActivity:
+    handler: src/handler.server
+    events:
+      - http: 'GET /{userProfile}/activities/{activityId}'
+  getMeasurements:
+    handler: src/handler.server
+    events:
+      - http: 'GET /{userProfile}/measurements'
+  getMeasurement:
+    handler: src/handler.server
+    events:
+      - http: 'GET /{userProfile}/measurements/measurementId'
 plugins:
   - serverless-offline
