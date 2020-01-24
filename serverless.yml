@@ -6,24 +6,24 @@ provider:
   region: us-east-1
 functions:
   getPofile:
-    handler: src/handler.server
+    handler: src/handlers/get-profile.handler
     events:
       - http: 'GET /{userProfile}/profile'
   getActivities:
-    handler: src/handler.server
+    handler: src/handlers/get-activities.handler
     events:
       - http: 'GET /{userProfile}/activities'
   getActivity:
-    handler: src/handler.server
+    handler: src/handlers/get-activity.handler
     events:
       - http: 'GET /{userProfile}/activities/{activityId}'
   getMeasurements:
-    handler: src/handler.server
+    handler: src/handlers/get-measurements.handler
     events:
       - http: 'GET /{userProfile}/measurements'
   getMeasurement:
-    handler: src/handler.server
+    handler: src/handlers/get-measurement.handler
     events:
-      - http: 'GET /{userProfile}/measurements/measurementId'
+      - http: 'GET /{userProfile}/measurements/{measurementId}'
 plugins:
   - serverless-offline
