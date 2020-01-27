@@ -25,5 +25,9 @@ functions:
     handler: src/handlers/get-measurement.handler
     events:
       - http: 'GET /{userProfile}/measurements/{measurementId}'
+  sandboxTestPost:
+      handler: src/sandbox/test-post.handler
+      events:
+      - http: 'POST /sandbox/test-post'
 plugins:
   - serverless-offline
