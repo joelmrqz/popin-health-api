@@ -8,23 +8,23 @@ functions:
   getPofile:
     handler: src/handlers/getProfile.handler
     events:
-      - http: 'GET /{userProfile}/profile'
+      - http: 'GET /individual/{userProfile}/profile'
   getActivities:
     handler: src/handlers/getActivities.handler
     events:
-      - http: 'GET /{userProfile}/activities'
+      - http: 'GET /individual/{userProfile}/activities'
   getActivity:
     handler: src/handlers/getActivity.handler
     events:
-      - http: 'GET /{userProfile}/activities/{activityId}'
+      - http: 'GET /individual/{userProfile}/activities/{activityId}'
   getMeasurements:
     handler: src/handlers/getMeasurements.handler
     events:
-      - http: 'GET /{userProfile}/measurements'
+      - http: 'GET /individual/{userProfile}/measurements'
   getMeasurement:
     handler: src/handlers/getMeasurement.handler
     events:
-      - http: 'GET /{userProfile}/measurements/{measurementId}'
+      - http: 'GET /individual/{userProfile}/measurements/{measurementId}'
   sandboxTestPost:
       handler: src/sandbox/test-post.handler
       events:
