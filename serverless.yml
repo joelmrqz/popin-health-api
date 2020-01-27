@@ -6,23 +6,23 @@ provider:
   region: us-east-1
 functions:
   getPofile:
-    handler: src/handlers/get-profile.handler
+    handler: src/handlers/getProfile.handler
     events:
       - http: 'GET /{userProfile}/profile'
   getActivities:
-    handler: src/handlers/get-activities.handler
+    handler: src/handlers/getActivities.handler
     events:
       - http: 'GET /{userProfile}/activities'
   getActivity:
-    handler: src/handlers/get-activity.handler
+    handler: src/handlers/getActivity.handler
     events:
       - http: 'GET /{userProfile}/activities/{activityId}'
   getMeasurements:
-    handler: src/handlers/get-measurements.handler
+    handler: src/handlers/getMeasurements.handler
     events:
       - http: 'GET /{userProfile}/measurements'
   getMeasurement:
-    handler: src/handlers/get-measurement.handler
+    handler: src/handlers/getMeasurement.handler
     events:
       - http: 'GET /{userProfile}/measurements/{measurementId}'
   sandboxTestPost:
