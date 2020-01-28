@@ -10,7 +10,7 @@
 // const ProviderType = require('../models/ProviderType');
 
 
-exports.handler = async (event, context) => {
+module.exports.handler = async (event, context) => {
   try {
     // TEMP BLOCK
     // Enable this when there are

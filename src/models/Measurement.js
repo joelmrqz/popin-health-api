@@ -3,7 +3,6 @@ const Client = require('./Client');
 const Provider = require('./Provider');
 const MeasurementType = require('./MeasurementType');
 
-
 class Measurement extends Model {}
 Measurement.init(
   {

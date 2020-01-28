@@ -1,4 +1,4 @@
-exports.handler = async (event, context) => {
+module.exports.handler = async (event, context) => {
   try {
     return {
       statusCode: 200,

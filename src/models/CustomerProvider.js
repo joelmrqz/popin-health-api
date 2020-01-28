@@ -3,7 +3,7 @@ const Customer = require('./Customer');
 const Provider = require('./Provider');
 
 class CustomerProvider extends Model {}
-Customer.init(
+CustomerProvider.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -39,4 +39,4 @@ Customer.init(
   }
 );
 
-module.exports = Customer;
+module.exports = CustomerProvider;
