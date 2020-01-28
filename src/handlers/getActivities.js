@@ -1,11 +1,9 @@
 exports.handler = async (event, context) => {
-  return {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(
-      [
+  try {
+    return {
+      statusCode: 200,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify([
         {
           id: 123,
           startTime: '2020-01-16T19:19:30Z',
@@ -13,7 +11,15 @@ exports.handler = async (event, context) => {
           duration: 60,
           type: 'Running',
         },
-      ],
-    ),
-  };
+      ]),
+    };
+  } catch (error) {
+    console.error('Internal Server Error:', error);
+
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Internal Server Error' }),
+    };
+  }
 };

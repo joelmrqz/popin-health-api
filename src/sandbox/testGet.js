@@ -3,16 +3,10 @@ exports.handler = async (event, context) => {
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify([
-        {
-          id: 123,
-          dateTime: '2020-01-16T19:19:30Z',
-          type: 'Heart Rate',
-        },
-      ]),
+      body: JSON.stringify({ message: 'Success' }),
     };
   } catch (error) {
-    console.error('Internal Server Error:', error);
+    console.error('ERROR:', error);
 
     return {
       statusCode: 500,

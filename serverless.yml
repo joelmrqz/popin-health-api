@@ -2,8 +2,14 @@ service: popin-one-health-api
 provider:
   name: aws
   runtime: nodejs12.x
-  stage: 'dev'
+  stage: ${opt:stage, 'dev'}
   region: us-east-1
+  environment:
+    DB_HOST: ${file(./env.yml):${self:provider.stage}.DB_HOST}
+    DB_USER: ${file(./env.yml):${self:provider.stage}.DB_USER}
+    DB_PASS: ${file(./env.yml):${self:provider.stage}.DB_PASS}
+    DB_NAME: ${file(./env.yml):${self:provider.stage}.DB_NAME}
+    DB_PORT: ${file(./env.yml):${self:provider.stage}.DB_PORT}
 functions:
   getPofile:
     handler: src/handlers/getProfile.handler
@@ -26,8 +32,12 @@ functions:
     events:
       - http: 'GET /individual/{userProfile}/measurements/{measurementId}'
   sandboxTestPost:
-      handler: src/sandbox/test-post.handler
+      handler: src/sandbox/testPost.handler
       events:
       - http: 'POST /sandbox/test-post'
+  sandboxTestGet:
+      handler: src/sandbox/testGet.handler
+      events:
+      - http: 'GET /sandbox/test-get'
 plugins:
   - serverless-offline

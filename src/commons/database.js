@@ -1,13 +1,17 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 
-const database = new Sequelize('HOST', {
-  database: 'DATABASE',
-  username: 'USERNAME',
-  password: 'PASSWORD',
+const database = new Sequelize({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
   dialect: 'postgres',
 });
 
 module.exports = {
-  database,
-  types: DataTypes,
+  dbconn: database,
+  Database: Sequelize,
+  DataTypes,
+  Model,
 };

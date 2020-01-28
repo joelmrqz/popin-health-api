@@ -1,5 +1,3 @@
-import database from '../commons/database';
-
 exports.handler = async (event, context) => {
   try {
     return {
