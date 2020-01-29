@@ -14,6 +14,7 @@ ProviderType.init(
   {
     sequelize: dbconn,
     modelName: 'providerType',
+    tableName: 'providerTypes',
   }
 );
 

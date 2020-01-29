@@ -36,6 +36,7 @@ CustomerProvider.init(
   {
     sequelize: dbconn,
     modelName: 'customerProvider',
+    tableName: 'customerProviders',
   }
 );
 

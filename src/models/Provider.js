@@ -23,6 +23,7 @@ Provider.init(
   {
     sequelize: dbconn,
     modelName: 'provider',
+    tableName: 'providers',
   }
 );
 

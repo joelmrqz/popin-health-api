@@ -14,6 +14,7 @@ Customer.init(
   {
     sequelize: dbconn,
     modelName: 'customer',
+    tableName: 'customers',
   }
 );
 

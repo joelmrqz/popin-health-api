@@ -1,8 +1,8 @@
 const { dbconn, Database, DataTypes, Model } = require('../commons/database');
 const Customer = require('./Customer');
 
-class Client extends Model {}
-Client.init(
+class User extends Model {}
+User.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -19,11 +19,18 @@ Client.init(
     terms: {
       type: DataTypes.BOOLEAN,
     },
+    createdAt: {
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
   },
   {
     sequelize: dbconn,
-    modelName: 'client',
+    modelName: 'user',
+    tableName: 'users',
   }
 );
 
-module.exports = Client;
+module.exports = User;

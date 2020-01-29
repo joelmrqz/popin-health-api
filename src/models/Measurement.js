@@ -1,5 +1,5 @@
 const { dbconn, Database, DataTypes, Model } = require('../commons/database');
-const Client = require('./Client');
+const User = require('./User');
 const Provider = require('./Provider');
 const MeasurementType = require('./MeasurementType');
 
@@ -10,10 +10,10 @@ Measurement.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    clientId: {
+    userId: {
       type: DataTypes.INTEGER,
       references: {
-        model: Client,
+        model: User,
         key: 'id',
         deferrable: Database.Deferrable.INITIALLY_IMMEDIATE,
       },
@@ -48,6 +48,7 @@ Measurement.init(
   {
     sequelize: dbconn,
     modelName: 'measurement',
+    tableName: 'measurements',
   }
 );
 

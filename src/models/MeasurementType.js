@@ -7,13 +7,14 @@ MeasurementType.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    name: {
+    measurementTypeName: {
       type: DataTypes.STRING,
     },
   },
   {
     sequelize: dbconn,
     modelName: 'measurementType',
+    tableName: 'measurementTypes',
   }
 );
 
