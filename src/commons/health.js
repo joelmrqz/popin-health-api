@@ -45,10 +45,9 @@ const health = {
     // Greater than 1 weight frequency
     if (frequency > 1) {
       const dateDelta = Math.floor(period / frequency);
-      let weight = params.weight;
 
       for (let i = (frequency - 1); i >= 0; i -= 1) {
-        weight += params.weightVariance;
+        const weight = (params.weight - (params.weightVariance * i));
         measurements.weight.push({
           id: ++id,
           measurementTypeId: 2,
