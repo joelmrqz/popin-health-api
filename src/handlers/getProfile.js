@@ -1,5 +1,8 @@
 module.exports.handler = async (event, context) => {
   try {
+    const query = event['queryStringParameters'];
+    console.log('query:', query);
+
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
