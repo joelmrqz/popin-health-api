@@ -16,7 +16,7 @@ Provider.init(
         deferrable: Database.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
-    name: {
+    providerName: {
       type: DataTypes.STRING,
     },
   },

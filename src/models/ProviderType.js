@@ -7,7 +7,7 @@ ProviderType.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    name: {
+    providerTypeName: {
       type: DataTypes.STRING,
     },
   },

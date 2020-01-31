@@ -7,7 +7,7 @@ Customer.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-    name: {
+    customerName: {
       type: DataTypes.STRING,
     },
   },
