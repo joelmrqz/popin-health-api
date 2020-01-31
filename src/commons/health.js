@@ -63,6 +63,15 @@ const health = {
 
     return measurements;
   },
+
+  computeBMI: (params) => {
+    // Assumes that the height is in
+    // inches and weight is in pounds.
+    const opA = 703 * params.weight;
+    const opB = params.height * params.height;
+    const bmi = opA / opB;
+    return bmi;
+  },
 };
 
 module.exports = health;
