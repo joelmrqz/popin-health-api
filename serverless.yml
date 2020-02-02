@@ -34,10 +34,10 @@ functions:
   sandboxTestPost:
       handler: src/sandbox/testPost.handler
       events:
-      - http: 'POST /sandbox/test-post'
+      - http: 'POST /sandbox/{userProfile}/test-post'
   sandboxTestGet:
       handler: src/sandbox/testGet.handler
       events:
-      - http: 'GET /sandbox/test-get'
+      - http: 'GET /sandbox/{userProfile}/test-get'
 plugins:
   - serverless-offline
