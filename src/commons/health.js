@@ -1,23 +1,23 @@
 const moment = require('moment');
 
 const health = {
-  buildMeasurements: (params) => {
-    let id = 0;
+  buildMeasurements: (params, options) => {
+    let id = options.measurementId;
     const period = 90;
-    const measurements = { height: [], weight: [] };
+    const measurements = [];
 
     // Create a measurement object
     // for `height` measurement type.
     // ------------------------
-    measurements.height.push({
+    measurements.push({
       id: ++id,
-      measurementTypeId: 1,
+      measurementTypeId: options.heightMeasurementType.id,
       measurementLabel: 'Height',
       measurementValue: params.height,
-      userId: 123,
-      providerId: 123,
-      selfReported: false,
-      createdAt: moment.utc(moment().subtract(period, 'day')),
+      userId: options.userId,
+      providerId: options.providerId,
+      selfProvided: options.selfProvided || false,
+      createdAt: moment.utc(),
     });
 
 
@@ -27,18 +27,17 @@ const health = {
     // ------------------------
     const frequency = parseInt(params.weightFrequency, 10);
 
-
     // Exactly 1 weight frequency
     if (frequency === 1) {
-      measurements.weight.push({
+      measurements.push({
         id: ++id,
-        measurementTypeId: 2,
+        measurementTypeId: options.weightMeasurementType.id,
         measurementLabel: 'Weight',
         measurementValue: params.weight,
-        userId: 123,
-        providerId: 123,
-        selfReported: false,
-        createdAt: moment.utc(moment().subtract(period, 'day')),
+        userId: options.userId,
+        providerId: options.providerId,
+        selfProvided: options.selfProvided || false,
+        createdAt: moment.utc(),
       });
     }
 
@@ -48,14 +47,14 @@ const health = {
 
       for (let i = (frequency - 1); i >= 0; i -= 1) {
         const weight = (params.weight - (params.weightVariance * i));
-        measurements.weight.push({
+        measurements.push({
           id: ++id,
-          measurementTypeId: 2,
+          measurementTypeId: options.weightMeasurementType.id,
           measurementLabel: 'Weight',
           measurementValue: weight,
-          userId: 123,
-          providerId: 123,
-          selfReported: false,
+          userId: options.userId,
+          providerId: options.providerId,
+          selfProvided: options.selfProvided || false,
           createdAt: moment.utc(moment().subtract((dateDelta * i), 'day')),
         });
       }

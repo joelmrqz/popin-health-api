@@ -40,7 +40,7 @@ Measurement.init(
         deferrable: Database.Deferrable.INITIALLY_IMMEDIATE,
       },
     },
-    selfReported: {
+    selfProvided: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
