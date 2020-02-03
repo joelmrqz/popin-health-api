@@ -69,7 +69,7 @@ const health = {
     const opA = 703 * params.weight;
     const opB = params.height * params.height;
     const bmi = opA / opB;
-    return bmi;
+    return parseFloat(bmi.toFixed(2));
   },
 };
 
