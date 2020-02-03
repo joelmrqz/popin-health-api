@@ -41,6 +41,7 @@ module.exports.handler = async (event, context) => {
     // Query for the latest height measurement.
     const heightMeasurement = await Measurement.findOne({
       where: {
+        userId: user.id,
         measurementTypeId: heightMeasurementType.id,
       },
       order: [['createdAt', 'DESC']],
@@ -50,6 +51,7 @@ module.exports.handler = async (event, context) => {
     // Query for the latest weight measurement.
     const weightMeasurement = await Measurement.findOne({
       where: {
+        userId: user.id,
         measurementTypeId: weightMeasurementType.id,
       },
       order: [['createdAt', 'DESC']],
