@@ -3,7 +3,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: ${opt:stage, 'dev'}
-  region: us-east-2
+  region: us-east-1
   environment:
     DB_HOST: ${file(./env.yml):${self:provider.stage}.DB_HOST}
     DB_USER: ${file(./env.yml):${self:provider.stage}.DB_USER}
