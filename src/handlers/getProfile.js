@@ -36,7 +36,7 @@ module.exports.handler = async (event, context) => {
     });
 
     if (heightMeasurement) {
-      data.height = heightMeasurement.measurementValue;
+      data.height = parseInt(heightMeasurement.measurementValue, 10);
     }
 
     // Query for the latest weight measurement.
@@ -49,7 +49,7 @@ module.exports.handler = async (event, context) => {
     });
 
     if (weightMeasurement) {
-      data.weight = weightMeasurement.measurementValue;
+      data.weight = parseInt(weightMeasurement.measurementValue, 10);
     }
 
     // Compute for the BMI.
