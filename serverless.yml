@@ -31,11 +31,11 @@ functions:
     handler: src/handlers/getMeasurement.handler
     events:
       - http: 'GET /individual/{userProfile}/measurements/{measurementId}'
-  sandboxTestPost:
+  sandboxSubmitData:
       handler: src/sandbox/submitData.handler
       events:
       - http: 'POST /sandbox/{userProfile}/data'
-  sandboxTestGet:
+  sandboxFetchData:
       handler: src/sandbox/fetchData.handler
       events:
       - http: 'GET /sandbox/{userProfile}/data'
