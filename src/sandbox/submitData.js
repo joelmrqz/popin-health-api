@@ -35,9 +35,7 @@ module.exports.handler = async (event, context) => {
 
     // Get the `providerId` associated with the user profile.
     const customerProvider = await CustomerProvider.findOne({
-      where: {
-        customerId: user.customerId,
-      },
+      where: { customerId: user.customerId },
     });
 
     if (!customerProvider) {
@@ -48,21 +46,20 @@ module.exports.handler = async (event, context) => {
 
     // Get measurement type for `height`.
     const heightMeasurementType = await MeasurementType.findOne({
-      where: {
-        measurementTypeName: 'height',
-      },
+      where: { measurementTypeName: 'height' },
     });
 
     // Get measurement type for `weight`.
     const weightMeasurementType = await MeasurementType.findOne({
-      where: {
-        measurementTypeName: 'weight',
-      },
+      where: { measurementTypeName: 'weight' },
     });
 
     // Get last inserted id of `measurements` table.
-    const allMeasurements = await Measurement.findAndCountAll({});
-    const lastInsertedId = allMeasurements.count;
+    const latestMeasurement = await Measurement.findOne({
+      order: [['id', 'DESC']],
+    });
+
+    const lastInsertedId = latestMeasurement.id;
 
     // Build options object for building
     // the measurement objects.
@@ -74,15 +71,12 @@ module.exports.handler = async (event, context) => {
       weightMeasurementType,
     };
 
-    console.log('OPTIONS:', options);
-
     // Build mesurement objects for db insert.
     const measurements = health.buildMeasurements(body, options);
 
     // Implement insert for the
     // built measurements.
-    const result = await Measurement.bulkCreate(measurements);
-    console.log('RESULT:', result);
+    await Measurement.bulkCreate(measurements);
     return response.buildSuccess({ message: 'success' }, 201);
   } catch (error) {
     console.error('ERROR:', error);

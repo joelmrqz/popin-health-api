@@ -9,7 +9,6 @@ module.exports.handler = async (event, context) => {
   try {
     // Get path parameters.
     const params = event.pathParameters;
-    console.log('PARAMS:', params);
 
     // Check the presence of `userProfile` param.
     if (!params  || !params.userProfile) {
@@ -17,7 +16,6 @@ module.exports.handler = async (event, context) => {
     }
 
     const user = await User.findByPk(params.userProfile);
-    console.log('USER:', user);
 
     // Check if the user exists on the database.
     if (!user) {
@@ -26,16 +24,12 @@ module.exports.handler = async (event, context) => {
 
     // Get measurement type for `height`.
     const heightMeasurementType = await MeasurementType.findOne({
-      where: {
-        measurementTypeName: 'height',
-      },
+      where: { measurementTypeName: 'height' },
     });
 
     // Get measurement type for `weight`.
     const weightMeasurementType = await MeasurementType.findOne({
-      where: {
-        measurementTypeName: 'weight',
-      },
+      where: { measurementTypeName: 'weight' },
     });
 
     // Query for the latest height measurement.
@@ -47,7 +41,6 @@ module.exports.handler = async (event, context) => {
       order: [['createdAt', 'DESC']],
     });
 
-
     // Query for the latest weight measurement.
     const weightMeasurement = await Measurement.findOne({
       where: {
@@ -57,6 +50,7 @@ module.exports.handler = async (event, context) => {
       order: [['createdAt', 'DESC']],
     });
 
+    // Build the response payload.
     const data = {
       height: heightMeasurement.measurementValue,
       weight: weightMeasurement.measurementValue,

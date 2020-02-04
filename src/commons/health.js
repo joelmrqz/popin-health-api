@@ -20,7 +20,6 @@ const health = {
       createdAt: moment.utc(),
     });
 
-
     // Create measurement object(s)
     // for `weight` depending on the
     // number of `weight frequency`.
