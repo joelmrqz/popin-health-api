@@ -52,6 +52,7 @@ module.exports.handler = async (event, context) => {
       data.weight = weightMeasurement.measurementValue;
     }
 
+    // Compute for the BMI.
     if (data.height && data.weight) {
       data.bmi = health.computeBMI({
         height: data.height,
