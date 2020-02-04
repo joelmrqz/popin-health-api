@@ -3,6 +3,9 @@ const response = require('../commons/response');
 // eslint-disable-next-line no-unused-vars
 module.exports.handler = async (event, context) => {
   try {
+    const query = event.queryStringParameters;
+    console.log('QUERY:', query);
+
     return response.buildSuccess([
       {
         id: 123,

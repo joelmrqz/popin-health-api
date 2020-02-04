@@ -1,23 +1,17 @@
+const authenticate = require('../commons/authenticate');
 const response = require('../commons/response');
 const health = require('../commons/health');
 const Measurement = require('../models/Measurement');
 const MeasurementType = require('../models/MeasurementType');
-const User = require('../models/User');
 
 // eslint-disable-next-line no-unused-vars
 module.exports.handler = async (event, context) => {
   try {
-    // Get path parameters.
-    const params = event.pathParameters;
+    const data = {};
 
-    // Check the presence of `userProfile` param.
-    if (!params  || !params.userProfile) {
-      return response.buildError(401);
-    }
+    // Validate `userProfile` parameter.
+    const user = await authenticate.userProfile(event.pathParameters);
 
-    const user = await User.findByPk(params.userProfile);
-
-    // Check if the user exists on the database.
     if (!user) {
       return response.buildError(401);
     }
@@ -41,6 +35,10 @@ module.exports.handler = async (event, context) => {
       order: [['createdAt', 'DESC']],
     });
 
+    if (heightMeasurement) {
+      data.height = heightMeasurement.measurementValue;
+    }
+
     // Query for the latest weight measurement.
     const weightMeasurement = await Measurement.findOne({
       where: {
@@ -50,15 +48,16 @@ module.exports.handler = async (event, context) => {
       order: [['createdAt', 'DESC']],
     });
 
-    // Build the response payload.
-    const data = {
-      height: heightMeasurement.measurementValue,
-      weight: weightMeasurement.measurementValue,
-      bmi: health.computeBMI({
-        height: heightMeasurement.measurementValue,
-        weight: weightMeasurement.measurementValue,
-      }),
-    };
+    if (weightMeasurement) {
+      data.weight = weightMeasurement.measurementValue;
+    }
+
+    if (data.height && data.weight) {
+      data.bmi = health.computeBMI({
+        height: data.height,
+        weight: data.weight,
+      });
+    }
 
     return response.buildSuccess(data);
   } catch (error) {
