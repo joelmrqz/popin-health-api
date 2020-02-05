@@ -66,12 +66,22 @@ module.exports.handler = async (event, context) => {
     };
 
     // Build mesurement objects for db insert.
-    const measurements = health.buildMeasurements(body, options);
+    const bodyMeasurements = health.buildBodyMeasurements(body, options);
+    const heartRateMeasurements = health.buildHeartRateMeasurements(body, options);
+    const bloodPressureMeasurements = health.buildBloodPressureMeasurements(body, options);
 
     // Implement insert for the
     // built measurements.
-    await Measurement.bulkCreate(measurements);
-    return response.buildSuccess({ message: 'success' }, 201);
+
+    // XXXXXXXXXXXXXXXXXX
+    // await Measurement.bulkCreate(measurements);
+
+
+    return response.buildSuccess({
+      bodyMeasurements,
+      heartRateMeasurements,
+      bloodPressureMeasurements,
+    }, 201);
   } catch (error) {
     console.error('ERROR:', error);
     return response.buildError(500);

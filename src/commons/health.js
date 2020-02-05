@@ -1,9 +1,11 @@
 const moment = require('moment');
 
+const PERIOD = 90;
+const MAX_HEART_RATE = 8640;
+
 const health = {
-  buildMeasurements: (params, options) => {
+  buildBodyMeasurements: (params, options) => {
     let id = options.measurementId;
-    const period = 90;
     const measurements = [];
 
     // Create a measurement object
@@ -42,7 +44,7 @@ const health = {
 
     // Greater than 1 weight frequency
     if (frequency > 1) {
-      const dateDelta = Math.floor(period / frequency);
+      const dateDelta = Math.floor(PERIOD / frequency);
 
       for (let i = (frequency - 1); i >= 0; i -= 1) {
         const weight = (params.weight - (params.weightVariance * i));
@@ -60,6 +62,16 @@ const health = {
     }
 
     return measurements;
+  },
+
+  buildHeartRateMeasurements: () => {
+    console.log(MAX_HEART_RATE);
+    return {};
+  },
+
+  buildBloodPressureMeasurements: () => {
+    console.log(MAX_HEART_RATE);
+    return {};
   },
 
   computeBMI: (params) => {
