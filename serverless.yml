@@ -39,5 +39,9 @@ functions:
       handler: src/sandbox/fetchData.handler
       events:
       - http: 'GET /sandbox/{userProfile}/data'
+  sandboxBackgroundFetch:
+      handler: src/sandbox/backgroundFetch.handler
+      events:
+      - http: 'POST /sandbox/background-fetch'
 plugins:
   - serverless-offline
