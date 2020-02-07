@@ -11,10 +11,7 @@ module.exports.handler = async (event, context) => {
 
     // Validate `userProfile` parameter.
     const user = await authenticate.userProfile(event.pathParameters);
-
-    if (!user) {
-      return response.buildError(401);
-    }
+    if (!user) { return response.buildError(401); }
 
     // Get measurement type for `height`.
     const heightMeasurementType = await MeasurementType.findOne({
@@ -28,10 +25,7 @@ module.exports.handler = async (event, context) => {
 
     // Query for the latest height measurement.
     const heightMeasurement = await Measurement.findOne({
-      where: {
-        userId: user.id,
-        measurementTypeId: heightMeasurementType.id,
-      },
+      where: { userId: user.id, measurementTypeId: heightMeasurementType.id },
       order: [['createdAt', 'DESC']],
     });
 
@@ -41,10 +35,7 @@ module.exports.handler = async (event, context) => {
 
     // Query for the latest weight measurement.
     const weightMeasurement = await Measurement.findOne({
-      where: {
-        userId: user.id,
-        measurementTypeId: weightMeasurementType.id,
-      },
+      where: { userId: user.id, measurementTypeId: weightMeasurementType.id },
       order: [['createdAt', 'DESC']],
     });
 
@@ -54,10 +45,7 @@ module.exports.handler = async (event, context) => {
 
     // Compute for the BMI.
     if (data.height && data.weight) {
-      data.bmi = health.computeBMI({
-        height: data.height,
-        weight: data.weight,
-      });
+      data.bmi = health.computeBMI({ height: data.height, weight: data.weight });
     }
 
     return response.buildSuccess(data);

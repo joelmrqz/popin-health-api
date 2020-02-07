@@ -10,10 +10,7 @@ module.exports.handler = async (event, context) => {
   try {
     // Validate `userProfile` parameter.
     const user = await authenticate.userProfile(event.pathParameters);
-
-    if (!user) {
-      return response.buildError(401);
-    }
+    if (!user) { return response.buildError(401); }
 
     // TODO:
     // Perform a more detailed
@@ -21,18 +18,14 @@ module.exports.handler = async (event, context) => {
     const body = JSON.parse(event.body);
 
     // Check if the request body is empty.
-    if (!body) {
-      return response.buildError(400);
-    }
+    if (!body) { return response.buildError(400); }
 
     // Get the `providerId` associated with the user profile.
     const customerProvider = await CustomerProvider.findOne({
       where: { customerId: user.customerId },
     });
 
-    if (!customerProvider) {
-      return response.buildError(400);
-    }
+    if (!customerProvider) { return response.buildError(400); }
 
     // Get measurement type for `height`.
     const heightMeasurementType = await MeasurementType.findOne({
@@ -46,14 +39,8 @@ module.exports.handler = async (event, context) => {
 
     // Get last inserted id of `measurements` table.
     let lastInsertedId = 0;
-    const latestMeasurement = await Measurement.findOne({
-      where: {},
-      order: [['id', 'DESC']],
-    });
-
-    if (latestMeasurement) {
-      lastInsertedId = latestMeasurement.id;
-    }
+    const latestMeasurement = await Measurement.findOne({ where: {}, order: [['id', 'DESC']] });
+    if (latestMeasurement) { lastInsertedId = latestMeasurement.id; }
 
     // Build options object for building
     // the measurement objects.
@@ -65,17 +52,20 @@ module.exports.handler = async (event, context) => {
       weightMeasurementType,
     };
 
-    // Build mesurement objects for db insert.
+    // Build mesurement objects for body measurements.
     const bodyMeasurements = health.buildBodyMeasurements(body, options);
+
+    // Build mesurement objects for heart rate measurements.
     const heartRateMeasurements = health.buildHeartRateMeasurements(body, options);
+
+    // Build mesurement objects for blood pressure measurements.
     const bloodPressureMeasurements = health.buildBloodPressureMeasurements(body, options);
 
     // Implement insert for the
     // built measurements.
 
-    // XXXXXXXXXXXXXXXXXX
+    // TEMP - DISABLE DB INSERT
     // await Measurement.bulkCreate(measurements);
-
 
     return response.buildSuccess({
       bodyMeasurements,

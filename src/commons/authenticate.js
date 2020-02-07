@@ -6,7 +6,8 @@ const authenticate = {
       return false;
     }
 
-    const user = await User.findByPk(pathParameters.userProfile);
+    const userProfile = parseInt(pathParameters.userProfile, 10);
+    const user = await User.findByPk(userProfile);
 
     if (!user) {
       return false;
