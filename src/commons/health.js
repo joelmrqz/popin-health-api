@@ -97,7 +97,7 @@ const health = {
           id: ++options.measurementId,
           measurementTypeId: 3,
           measurementLabel: 'Heart Rate',
-          measurementValue: computedHeartRate,
+          measurementValue: parseInt(computedHeartRate.toFixed(0), 10),
           userId: options.userId,
           providerId: options.providerId,
           selfProvided: options.selfProvided || false,
@@ -110,8 +110,30 @@ const health = {
     return heartRateMeasurements;
   },
 
-  buildBloodPressureMeasurements: () => {
+  buildBloodPressureMeasurements: (params, options) => {
     const bloodPressureMeasurements = [];
+
+    bloodPressureMeasurements.push({
+      id: ++options.measurementId,
+      measurementTypeId: 4,
+      measurementLabel: 'BP Systolic',
+      measurementValue: 0,
+      userId: options.userId,
+      providerId: options.providerId,
+      selfProvided: options.selfProvided || false,
+      createdAt: moment.utc().toISOString(),
+    });
+
+    bloodPressureMeasurements.push({
+      id: ++options.measurementId,
+      measurementTypeId: 4,
+      measurementLabel: 'BP Diastolic',
+      measurementValue: 0,
+      userId: options.userId,
+      providerId: options.providerId,
+      selfProvided: options.selfProvided || false,
+      createdAt: moment.utc().toISOString(),
+    });
 
     return bloodPressureMeasurements;
   },
