@@ -91,7 +91,7 @@ const health = {
 
       for (let i = (frequency - 1); i >= 0; i -= 1) {
         const computedHeartRate = (heartRate - (variance * i));
-        console.log(` HR_DATE: ${moment.utc().startOf('day').add((intervalValue * i), intervalMode).toISOString()} - HR_VALUE: ${computedHeartRate}`);
+        console.log(`HR_DATE: ${moment.utc().startOf('day').add((intervalValue * i), intervalMode).toISOString()} - HR_VALUE: ${parseInt(computedHeartRate.toFixed(0), 10)}`);
 
         heartRateMeasurements.push({
           id: ++options.measurementId,
@@ -112,12 +112,15 @@ const health = {
 
   buildBloodPressureMeasurements: (params, options) => {
     const bloodPressureMeasurements = [];
+    const variance = params.bpVariance;
+    const systolic = params.bpSystolic;
+    const diastolic = params.bpDiastolic;
 
     bloodPressureMeasurements.push({
       id: ++options.measurementId,
       measurementTypeId: 4,
       measurementLabel: 'BP Systolic',
-      measurementValue: 0,
+      measurementValue: systolic + (variance / 100),
       userId: options.userId,
       providerId: options.providerId,
       selfProvided: options.selfProvided || false,
@@ -128,7 +131,7 @@ const health = {
       id: ++options.measurementId,
       measurementTypeId: 4,
       measurementLabel: 'BP Diastolic',
-      measurementValue: 0,
+      measurementValue: diastolic - (variance / 100),
       userId: options.userId,
       providerId: options.providerId,
       selfProvided: options.selfProvided || false,
