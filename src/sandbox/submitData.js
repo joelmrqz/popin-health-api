@@ -63,15 +63,9 @@ module.exports.handler = async (event, context) => {
 
     // Implement insert for the
     // built measurements.
-
-    // TEMP - DISABLE DB INSERT
-    // await Measurement.bulkCreate(measurements);
-
-    return response.buildSuccess({
-      bodyMeasurements,
-      heartRateMeasurements,
-      bloodPressureMeasurements,
-    }, 201);
+    const measurements = bodyMeasurements.concat(heartRateMeasurements, bloodPressureMeasurements);
+    await Measurement.bulkCreate(measurements);
+    return response.buildSuccess({ message: 'Created' }, 201);
   } catch (error) {
     console.error('ERROR:', error);
     return response.buildError(500);
